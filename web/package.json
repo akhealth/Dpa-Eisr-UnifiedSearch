@@ -1,0 +1,110 @@
+{
+  "name": "eis-unified-search",
+  "description": "A search tool that finds program applications across multiple benefits systems",
+  "version": "0.0.1",
+  "author": {
+    "name": "Alaska Division of Public Assistance",
+    "homepage": "https://alaskadhss.visualstudio.com/Dpa"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              ">1%",
+              "ie >= 10"
+            ]
+          }
+        }
+      ],
+      "react"
+    ],
+    "plugins": [
+      "babel-plugin-webpack-alias",
+      "transform-object-rest-spread"
+    ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-solid": "^5.0.10",
+    "@fortawesome/react-fontawesome": "0.0.18",
+    "babel-polyfill": "^6.26.0",
+    "baobab": "^2.5.2",
+    "baobab-react": "^3.0.0",
+    "lodash.isequal": "^4.5.0",
+    "purecss-sass": "^1.0.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-router-dom": "^4.2.2",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-webpack-alias": "^2.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "browser-sync": "^2.23.6",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "eslint-plugin-react": "^7.7.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.8.3",
+    "nodemon": "^1.17.3",
+    "optimize-css-assets-webpack-plugin": "^4.0.0",
+    "sass-loader": "^6.0.7",
+    "standard": "^11.0.1",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "plugin:react/recommended"
+    ],
+    "rules": {
+      "object-curly-spacing": [
+        2,
+        "always"
+      ],
+      "array-bracket-spacing": [
+        2,
+        "always"
+      ],
+      "func-style": [
+        2,
+        "expression"
+      ],
+      "prefer-arrow-callback": [
+        2,
+        {
+          "allowNamedFunctions": false
+        }
+      ],
+      "react/jsx-curly-spacing": [
+        2,
+        "always"
+      ]
+    }
+  },
+  "homepage": "https://alaskadhss.visualstudio.com/Dpa/Eisr-UnifiedSearch/",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://alaskadhss.visualstudio.com/Dpa/_git/Dpa-Eisr-UnifiedSearch"
+  },
+  "scripts": {
+    "build": "webpack --progress --colors",
+    "lint": "standard client/**/*.js",
+    "start": "nodemon --legacy-watch --watch webpack.config.js -x 'webpack --colors --progress -w'"
+  }
+}

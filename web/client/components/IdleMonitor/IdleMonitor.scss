@@ -1,0 +1,10 @@
+@import '~styles/variables';
+
+.idle-monitor-debug {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  border-radius: 3px;
+}

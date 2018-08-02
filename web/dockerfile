@@ -1,0 +1,27 @@
+FROM microsoft/dotnet:2.0.6-sdk-2.1.104
+WORKDIR /app
+
+# Install latest 9.x version of nodejs
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+RUN apt-get install -y nodejs
+
+# Copy C# config and restore server-side packages
+COPY global.json web.csproj web.config ./
+RUN dotnet restore
+
+# Copy source files and runtime configs, then build
+COPY src ./src
+RUN dotnet build
+
+# Copy npm package.json and restore
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy client-side source and build configs
+COPY webpack.config.js ./
+COPY client ./client
+
+# Bundle client-side assets with webpack
+RUN npm run build
+
+CMD [ "dotnet", "run" ]

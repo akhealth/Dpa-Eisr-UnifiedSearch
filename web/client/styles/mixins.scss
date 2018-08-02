@@ -1,0 +1,61 @@
+@import '~styles/variables';
+
+// Helper for specific device size styles
+// Breakpoints are based on https://purecss.io/grids/
+@mixin screen($screen-size) {
+  @if $screen-size == xs {
+    @media only screen and (min-width: $screen-xs) { @content; }
+  }
+  @if $screen-size == sm {
+    @media only screen and (min-width: $screen-sm) { @content; }
+  }
+  @if $screen-size == md {
+    @media only screen and (min-width: $screen-md) { @content; }
+  }
+  @if $screen-size == lg {
+    @media only screen and (min-width: $screen-lg) { @content; }
+  }
+  @if $screen-size == xl {
+    @media only screen and (min-width: $screen-xl) { @content; }
+  }
+}
+
+// Reflow tables on screens below the given $screen-size
+// Requires use of "data-label" attributes on table cells
+@mixin table-responsive($screen-size) {
+  @media only screen and (max-width: $screen-size) {
+    table-layout: fixed;
+    border: 0;
+
+    thead {
+      clip: rect(0 0 0 0);
+      position: absolute;
+      overflow: hidden;
+      height: 0;
+      margin: 0;
+      padding: 0;
+    }
+
+    tr {
+      display: block;
+      margin-bottom: .8em;
+    }
+
+    td {
+      display: block;
+      font-size: .9em;
+      text-align: right;
+      border-color: #e6e6e6;
+    }
+
+    td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+    }
+
+    td:last-child {
+      border-bottom: 0;
+    }
+  }
+}

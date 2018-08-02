@@ -1,0 +1,114 @@
+@import 'purecss/_buttons';
+@import 'purecss/_menus';
+@import 'purecss/_grids';
+@import 'purecss/_grids-responsive';
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.header {
+  width: 100%;
+  height: 70px;
+  display: block;
+  background: white;
+  border-bottom: $standard-border;
+  margin-bottom: 40px;
+  padding: 10px 12px;
+  overflow: hidden;
+  @include screen(md) {
+    height: 85px;
+  }
+}
+
+.header-menu {
+  @extend .pure-menu;
+  @extend .pure-menu-horizontal;
+  max-width: $max-page-width;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.header-logo {
+  @extend .pure-menu-heading;
+  height: 100%;
+  margin-right: 10px;
+  padding: 0.35em 0;
+  h1 {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  img {
+    height: 100%;
+  }
+  @include screen(md) {
+    margin-right: 15px;
+    padding: 0.5em 1em;
+  }
+}
+
+.header .breadcrumb {
+  @extend .pure-menu-list;
+  display: inline-block;
+  top: 5px;
+
+  li {
+    @extend .pure-menu-item;
+    font-size: 0.9em;
+    color: $link-color;
+    display: inline-block;
+    cursor: pointer;
+    @include screen(md) {
+      font-size: 1.1em;
+    }
+  }
+  li:after {
+    content: "〉";
+    font-size: 0.75em;
+    font-weight: bold;
+    margin: 0 5px 0 10px;
+    color: $label-color;
+  }
+  li:last-child:after {
+    content: "";
+  }
+}
+
+.header .user-controls {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 10px;
+  @include screen(md) {
+    padding-top: 15px;
+  }
+  .user-info {
+    height: 100%;
+    text-align: right;
+    margin-right: 15px;
+    display: none;
+    @include screen(xs) {
+      display: inline-block;
+    }
+    .username {
+      font-size: 0.8em;
+      font-weight: bold;
+      position: relative;
+      top: 50%;
+      transform: translateY(-76%);
+      @include screen(md) {
+        font-size: 1em;
+      }
+    }
+  }
+
+  .logout {
+    @extend .pure-button;
+    vertical-align: top;
+    font-size: 0.8em;
+    @include screen(md) {
+      font-size: 1em;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+
+  api:
+    build: ./api
+    container_name: dhss_search_api
+    volumes:
+      - ./api/src:/app/src
+      - ./api/config.json:/app/config.json
+    ports:
+      - "5000:5000"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - SEARCH_API_ASPNETCORE_URLS
+      - ASPNETCORE_ENVIRONMENT
+      - SEARCH_LOG_LEVEL
+      - SEARCH_LOG_FORMAT
+      - ESB_URL
+      - ESB_AUTH_USER
+      - ESB_AUTH_PASS
+      - SEARCH_WEB_URL
+      - SEARCH_WEB_SECURE_URL
+      - WEBSEAL_AUTH_USER
+      - WEBSEAL_AUTH_PASS
+      - WEBSEAL_AUTH_DISABLED
+    command: "/usr/bin/dotnet watch run"
+    tty: true
+
+  web:
+    build: ./web
+    container_name: dhss_search_web
+    depends_on:
+      - api
+    volumes:
+      - ./web/client:/app/client
+      - ./web/src:/app/src
+      - ./web/wwwroot:/app/wwwroot
+      - ./web/webpack.config.js:/app/webpack.config.js
+    ports:
+      - "5001:5001"
+      - "5002:5002"
+      - "5003:3001"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - SEARCH_WEB_ASPNETCORE_URLS
+      - ASPNETCORE_ENVIRONMENT
+      - NODE_ENV
+      - SEARCH_LOG_LEVEL
+      - SEARCH_LOG_FORMAT
+      - SEARCH_API_URL
+      - SEARCH_WEB_URL
+      - WEBSEAL_AUTH_USER
+      - WEBSEAL_AUTH_PASS
+      - WEBSEAL_AUTH_DISABLED
+    command:
+      - bash
+      - -c
+      - /usr/bin/dotnet watch run & npm start
+    tty: true
+
+  docs:
+    build: ./docs
+    container_name: dhss_search_docs
+    volumes:
+      - ./docs:/app
+      - /app/_book
+    ports:
+      - "5004:5004"
+      - "35729:35729"
+    command: "gitbook serve --port 5004"

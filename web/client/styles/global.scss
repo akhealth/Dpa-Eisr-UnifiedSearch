@@ -1,0 +1,44 @@
+@import 'purecss/_base';
+@import 'purecss/_buttons';
+
+@import '~styles/fonts';
+@import '~styles/variables';
+
+body {
+  background-color: $body-color;
+  min-width: 360px;
+}
+
+body * {
+  box-sizing: border-box;
+  font-family: $font-family !important;
+  letter-spacing: -0.03em;
+}
+
+input {
+  border-radius: 1px !important;
+  background: white;
+  padding-left: 5px;
+  color: $input-text-color;
+  font-size: $body-text;
+}
+
+button[type="submit"],
+input[type="submit"] {
+  @extend .pure-button;
+  @extend .pure-button-primary;
+  background: $btn-primary-back-color;
+  color: $btn-primary-text-color;
+}
+
+label {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: $link-color;
+  &:hover {
+    text-decoration: underline;
+  }
+}

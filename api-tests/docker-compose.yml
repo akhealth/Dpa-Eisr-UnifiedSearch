@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  tests:
+    image: microsoft/dotnet:2.0.6-sdk-2.1.104
+    volumes:
+      - ../api/api.csproj:/api/api.csproj
+      - ../api/src:/api/src
+      - ./api-tests.csproj:/tests/api-tests.csproj
+      - ./IntegrationTests:/tests/IntegrationTests
+      - ./UnitTests:/tests/UnitTests
+    environment:
+      - ESB_URL
+    command:
+      - bash
+      - -c
+      - cd /tests && /usr/bin/dotnet restore && /usr/bin/dotnet test

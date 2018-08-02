@@ -1,0 +1,14 @@
+FROM microsoft/dotnet:2.0.6-sdk-2.1.104
+
+WORKDIR /app
+
+# Copy C# config and restore server-side packages
+COPY global.json api.csproj web.config ./
+RUN dotnet restore
+
+# Copy source files and runtime configs, then build
+COPY src ./src
+COPY wwwroot ./wwwroot
+RUN dotnet build
+
+CMD [ "dotnet", "run" ]

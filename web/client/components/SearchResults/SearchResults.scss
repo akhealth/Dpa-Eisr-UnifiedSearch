@@ -1,0 +1,62 @@
+@import 'purecss/_tables';
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.search-results {
+  height: 100%;
+  overflow-x: auto;
+  &.no-results,
+  &.searching,
+  &.timed-out,
+  &.request-error {
+    background: $content-back-color;
+    display: flex;
+    border: $standard-border;
+  }
+}
+
+.search-results.no-results span,
+.search-results.searching span,
+.search-results.timed-out span,
+.search-results.request-error span {
+  margin: auto;
+}
+
+#no-results-message,
+#timed-out-message,
+#request-error-message {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.search-results .search-results-count {
+  width: 100%;
+  padding-bottom: 15px;
+  @include screen(md) {
+    padding-bottom: 7px;
+  }
+}
+
+.search-results table {
+  @extend .pure-table;
+  @extend .pure-table-horizontal;
+  @include table-responsive($screen-lg);
+  width: 100%;
+  tbody tr {
+    background: white;
+    border: $standard-border;
+  }
+  tbody tr:last-child() > td {
+    border-bottom-width: 1px;
+  }
+  td {
+    white-space: nowrap;
+    font-size: $body-text;
+    padding: 0.6em 1em;
+  }
+}
+
+.search-results table p {
+  margin: 0;
+}

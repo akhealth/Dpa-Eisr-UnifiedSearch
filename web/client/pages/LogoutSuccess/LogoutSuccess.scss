@@ -1,0 +1,12 @@
+@import 'purecss/_buttons';
+
+.logout-success-page {
+  text-align: center;
+}
+
+.return-home {
+  @extend .pure-button;
+  @extend .pure-button-primary;
+  margin-top: 30px;
+  width: 220px;
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {
+    "location": "USGov Arizona",
+    "planSize": "S1",
+    "baseName": "Test-DpaEisrUnifiedSearch",
+    "webName": "[concat(variables('baseName'), '-Web')]",
+    "apiName": "[concat(variables('baseName'), '-Api')]"
+  },
+  "resources": [{
+      "type": "Microsoft.Web/serverfarms",
+      "comments": "This is the AppService Plan that our websites run under",
+      "apiVersion": "2016-09-01",
+      "kind": "app",
+      "name": "[variables('baseName')]",
+      "location": "[variables('location')]",
+      "properties": {},
+      "dependsOn": [],
+      "sku": {
+        "name": "[variables('planSize')]"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "comments": "This is the UnifiedSearch Web app and its default slot",
+      "apiVersion": "2016-08-01",
+      "kind": "app",
+      "name": "[variables('webName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "httpLoggingEnabled": true,
+          "logsDirectorySizeLimit": 100,
+          "detailedErrorLoggingEnabled": false,
+          "requestTracingEnabled": true
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]"
+      ],
+      "resources": [{
+          "type": "Microsoft.Web/sites/slots",
+          "comments": "Extra slots are created as sub-resources",
+          "apiVersion": "2016-08-01",
+          "name": "[concat(variables('webName'), '/', 'Development')]",
+          "kind": "app",
+          "location": "[variables('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+            "httpsOnly": true,
+            "siteConfig": {
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": false,
+              "requestTracingEnabled": true
+            }
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('webName'))]"
+          ]
+        },
+        {
+          "type": "Microsoft.Web/sites/slots",
+          "comments": "Extra slots are created as sub-resources",
+          "apiVersion": "2016-08-01",
+          "name": "[concat(variables('webName'), '/', 'Staging')]",
+          "kind": "app",
+          "location": "[variables('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+            "httpsOnly": true,
+            "siteConfig": {
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": false,
+              "requestTracingEnabled": true
+            }
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('webName'))]"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "comments": "This is the UnifiedSearch API app and its default slot",
+      "apiVersion": "2016-08-01",
+      "kind": "app",
+      "name": "[variables('apiName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+        "httpsOnly": true,
+        "siteConfig": {
+          "httpLoggingEnabled": true,
+          "logsDirectorySizeLimit": 100,
+          "detailedErrorLoggingEnabled": false,
+          "requestTracingEnabled": true
+        }
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]"
+      ],
+      "resources": [{
+          "type": "Microsoft.Web/sites/slots",
+          "comments": "Extra slots are created as sub-resources",
+          "apiVersion": "2016-08-01",
+          "name": "[concat(variables('apiName'), '/', 'Development')]",
+          "kind": "app",
+          "location": "[variables('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+            "httpsOnly": true,
+            "siteConfig": {
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": false,
+              "requestTracingEnabled": true
+            }
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('apiName'))]"
+          ]
+        },
+        {
+          "type": "Microsoft.Web/sites/slots",
+          "comments": "Extra slots are created as sub-resources",
+          "apiVersion": "2016-08-01",
+          "name": "[concat(variables('apiName'), '/', 'Staging')]",
+          "kind": "app",
+          "location": "[variables('location')]",
+          "properties": {
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('baseName'))]",
+            "httpsOnly": true,
+            "siteConfig": {
+              "httpLoggingEnabled": true,
+              "logsDirectorySizeLimit": 100,
+              "detailedErrorLoggingEnabled": false,
+              "requestTracingEnabled": true
+            }
+          },
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', variables('apiName'))]"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+
+# don't send unnecessary folders as build context to docker
+node_modules/
+obj/
+bin/

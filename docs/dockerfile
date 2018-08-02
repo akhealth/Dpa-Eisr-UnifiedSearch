@@ -1,0 +1,9 @@
+FROM node:9.5.0-alpine
+
+RUN npm install --global gitbook-cli
+
+WORKDIR /app
+
+COPY . .
+
+CMD [ "gitbook", "serve" ]

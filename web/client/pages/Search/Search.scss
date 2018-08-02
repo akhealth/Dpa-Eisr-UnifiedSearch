@@ -1,0 +1,69 @@
+@import 'purecss/_buttons';
+@import 'purecss/_forms';
+@import 'purecss/_grids';
+@import 'purecss/_grids-responsive';
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.search-page .page-content {
+  @extend .pure-g;
+}
+
+.search-form {
+  @extend .pure-u-1;
+  @extend .pure-u-md-1-4;
+  @extend .pure-u-lg-1-5;
+  margin-bottom: 35px;
+  padding: 0;
+  @include screen(md) {
+    padding: 0 15px 0 0;
+  }
+}
+.search-form form {
+  @extend .pure-form;
+  @extend .pure-form-stacked;
+}
+
+.search-form .control-group {
+  @extend .pure-control-group;
+  margin-bottom: 15px;
+  input {
+    width: 100%;
+  }
+  span.error {
+    color: $error-color;
+    font-size: $error-text-size;
+  }
+}
+
+.search-results-wrapper {
+  @extend .pure-u-1;
+  @extend .pure-u-md-3-4;
+  @extend .pure-u-lg-4-5;
+  min-height: 400px;
+  padding-left: 20px;
+}
+
+.error-label {
+  @extend .pure-form;
+  font-size: $error-text-size;
+  color: $error-color;
+  position: absolute;
+  margin-top: -5px;
+}
+
+.search-buttons {
+  display: flex;
+}
+
+.search-buttons button {
+  flex: 1;
+  margin: 0 !important;
+}
+
+#cancel-search {
+  @extend .pure-button;
+  color: $btn-cancel-text-color;
+  background-color: $btn-cancel-back-color;
+  margin-right: 10px !important;
+}

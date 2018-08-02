@@ -1,0 +1,26 @@
+@import '~styles/mixins';
+@import '~styles/variables';
+
+.page {
+  max-width: $max-page-width;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  color: $label-color;
+  padding: 0 12px;
+  @include screen(md) {
+    padding: 0 15px;
+  }
+}
+
+.page-header {
+  max-height: 50px;
+}
+
+.page-header > h1 {
+  margin: 0;
+}
+
+.page-content h2 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
